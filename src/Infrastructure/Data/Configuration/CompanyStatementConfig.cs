@@ -8,8 +8,8 @@ namespace Infrastructure.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<CompanyStatement> entity)
         {
-            entity.Property(e => e.ID).HasColumnName("ID");
-            entity.HasKey(x => x.ID);
+            entity.Property(e => e.Id).HasColumnName("Id");
+            entity.HasKey(x => x.Id);
 
             entity.HasOne(d => d.DestinataryNavigation)
                 .WithMany(p => p.CompanyStatementDestinataryNavigation)

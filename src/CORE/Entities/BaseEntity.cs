@@ -6,6 +6,6 @@ namespace CORE.Entities
 {
     public class BaseEntity
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
     }
 }

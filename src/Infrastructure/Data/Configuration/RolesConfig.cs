@@ -8,8 +8,8 @@ namespace Infrastructure.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<Roles> entity)
         {
-            entity.Property(e => e.ID).HasColumnName("ID");
-            entity.HasKey(x => x.ID);
+            entity.Property(e => e.Id).HasColumnName("Id");
+            entity.HasKey(x => x.Id);
 
             entity.Property(e => e.NameRoles)
                 .IsRequired()

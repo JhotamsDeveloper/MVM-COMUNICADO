@@ -8,6 +8,7 @@ namespace API.Responses
 {
     public class ApiResponse<T>
     {
+        public string msg { get; set; }
         public ApiResponse(T data)
         {
             Data = data;

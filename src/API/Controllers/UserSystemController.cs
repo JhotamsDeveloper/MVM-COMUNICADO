@@ -32,9 +32,28 @@ namespace API.Controllers
         public async Task<IActionResult> InsertUserSystem(UserSystemDto userSystem )
         {
             var _userSystem = _mapper.Map<UserSystem>(userSystem);
-            await _userSystemService.InsertUserSystem(_userSystem);
             var _userSystemDto = _mapper.Map<UserSystemDto>(_userSystem);
-            var response = new ApiResponse<UserSystemDto>(_userSystemDto);
+            ApiResponse<UserSystemDto> response = new ApiResponse<UserSystemDto>(_userSystemDto);
+
+            if (!_userSystemService.ValidadUserSystemByEmail(userSystem.Email))
+            {
+                await _userSystemService.InsertUserSystem(_userSystem);
+                var responseApi = new ApiResponse<UserSystemDto>(_userSystemDto)
+                {
+                    msg = "Usuario guardado exitosamente"
+                };
+
+                response = responseApi;
+            }
+            else
+            {
+                var responseApi = new ApiResponse<UserSystemDto>(_userSystemDto)
+                {
+                    msg = "El Email ingresado ya existe"
+                };
+                response = responseApi;
+            }
+
             return Ok(response);
         }
 

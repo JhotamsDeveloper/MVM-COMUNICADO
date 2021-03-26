@@ -11,9 +11,10 @@ namespace CORE.Interfaces
         Task<UserSystem> GetUserSystem(int id);
 
         Task InsertUserSystem(UserSystem userSystem);
-
+        bool ValidadUserSystemByEmail(string email);
         Task<bool> UpdateUserSystem(UserSystem userSystem);
 
         Task<bool> DeleteUserSystem(int id);
+
     }
 }

@@ -3,6 +3,7 @@ using CORE.Excepciones;
 using CORE.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace CORE.Services
@@ -23,30 +24,48 @@ namespace CORE.Services
 
         public async Task InsertUserSystem(UserSystem userSystem)
         {
-            var user = await _unitOfWork.UserSystemRepository.GetById(userSystem.ID);
-            if (user == null)
-            {
-                throw new BusinessException("User doesn't exist");
-            }
-
-            await _unitOfWork.UserSystemRepository.Add(user);
+            await _unitOfWork.UserSystemRepository.Add(userSystem);
             await _unitOfWork.saveChangesAsync();
         }
 
-        public Task<bool> DeleteUserSystem(int id)
+        public bool ValidadUserSystemByEmail(string email)
         {
-            throw new System.NotImplementedException();
+            bool _result = false;
+            var _data = _unitOfWork.UserSystemRepository.GetAll();
+            if (_data != null)
+            {
+                _data.Where(x => x.Email == email);
+                _result = true;
+            }
+            else { _result = false; }
+            return _result;
         }
 
-        public Task<UserSystem> GetUserSystem(int id)
+        public async Task<bool> DeleteUserSystem(int id)
         {
-            throw new System.NotImplementedException();
+            await _unitOfWork.UserSystemRepository.Delete(id);
+            await _unitOfWork.saveChangesAsync();
+            return true;
         }
 
-
-        public Task<bool> UpdateUserSystem(UserSystem userSystem)
+        public async Task<UserSystem> GetUserSystem(int id)
         {
-            throw new System.NotImplementedException();
+            return await _unitOfWork.UserSystemRepository.GetById(id);
+        }
+
+        public async Task<bool> UpdateUserSystem(UserSystem userSystem)
+        {
+            var _existeUster = await _unitOfWork.UserSystemRepository.GetById(userSystem.Id);
+            _existeUster.NameUser = userSystem.NameUser;
+            _existeUster.TypeDocument = userSystem.TypeDocument;
+            _existeUster.Document = userSystem.Document;
+            _existeUster.Phone = userSystem.Phone;
+            _existeUster.Email = userSystem.Email;
+            _existeUster.AddressUser = userSystem.AddressUser;
+
+            _unitOfWork.UserSystemRepository.Update(_existeUster);
+            await _unitOfWork.saveChangesAsync();
+            return true;
         }
     }
 }

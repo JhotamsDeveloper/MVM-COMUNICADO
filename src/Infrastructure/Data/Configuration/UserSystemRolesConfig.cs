@@ -8,6 +8,9 @@ namespace Infrastructure.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<UserSystemRoles> entity)
         {
+            entity.Property(e => e.Id).HasColumnName("Id");
+            entity.HasKey(x => x.Id);
+
             entity.HasOne(d => d.RolesNavigation)
                 .WithMany(p => p.UserSystemRoles)
                 .HasForeignKey(d => d.Roles)

@@ -14,7 +14,7 @@ namespace CORE.DTOs
             CompanyStatementRemitentNavigation = new HashSet<CompanyStatement>();
             UserSystemRoles = new HashSet<UserSystemRoles>();
         }
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string NameUser { get; set; }
         public int TypeDocument { get; set; }
         public string Document { get; set; }

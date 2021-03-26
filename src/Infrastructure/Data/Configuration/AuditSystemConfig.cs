@@ -8,6 +8,8 @@ namespace Infrastructure.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<AuditSystem> entity)
         {
+            entity.Property(e => e.Id).HasColumnName("Id");
+            entity.HasKey(x => x.Id);
 
             entity.Property(e => e.DateCreate).HasColumnType("datetime");
 
