@@ -8,6 +8,7 @@ namespace CORE.Interfaces
 {
     public interface IUserSystemService
     {
+        IEnumerable<UserSystem> GetAll();
         Task<UserSystem> GetUserSystem(int id);
 
         Task InsertUserSystem(UserSystem userSystem);

@@ -1,5 +1,9 @@
+using API.FluentValidation;
+using CORE.DTOs;
 using CORE.Interfaces;
 using CORE.Services;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -32,10 +36,14 @@ namespace API
             //Configurando el servicio de automapper desde cualquier parte de la solucion (dominio)
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            services.AddMvc();
+            services.AddMvc().AddFluentValidation();
+
+            // AddFluentValidation
+            services.AddTransient<IValidator<UserSystemDto>, ValidateUserSystem>();
 
             services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
             services.AddTransient<IUserSystemService, UserSystemService>();
+            services.AddTransient<ICompanyStatementService, CompanyStatementService>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
         }
 

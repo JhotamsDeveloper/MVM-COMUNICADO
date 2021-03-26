@@ -12,7 +12,9 @@ namespace CORE.Entities
         public string NameFile { get; set; }
         public int? Remitent { get; set; }
         public int? Destinatary { get; set; }
-
+        public string FilingNumber { get; set; }
+        public bool IsItInternally { get; set; }
+        public int TotalReleases { get; set; }
         public virtual UserSystem DestinataryNavigation { get; set; }
         public virtual UserSystem RemitentNavigation { get; set; }
     }

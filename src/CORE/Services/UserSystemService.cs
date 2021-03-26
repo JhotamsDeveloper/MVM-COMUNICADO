@@ -31,12 +31,8 @@ namespace CORE.Services
         public bool ValidadUserSystemByEmail(string email)
         {
             bool _result = false;
-            var _data = _unitOfWork.UserSystemRepository.GetAll();
-            if (_data != null)
-            {
-                _data.Where(x => x.Email == email);
-                _result = true;
-            }
+            var _data = _unitOfWork.UserSystemRepository.GetAll().Where(x => x.Email.Contains(email));
+            if (_data.Any()){_result = true;}
             else { _result = false; }
             return _result;
         }

@@ -12,6 +12,7 @@ namespace Infrastructure.Mappings
         public AutoMapperProfiles()
         {
             CreateMap<UserSystem, UserSystemDto>().ReverseMap();
+            CreateMap<CompanyStatement, CompanyStatementDto>().ReverseMap();
             //CreateMap<Security, SecurityDto>().ReverseMap();
         }
     }

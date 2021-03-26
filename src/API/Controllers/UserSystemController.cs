@@ -4,6 +4,8 @@ using CORE.DTOs;
 using CORE.Entities;
 using CORE.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace API.Controllers
@@ -23,9 +25,17 @@ namespace API.Controllers
             _mapper = mapper;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult UserSystemGetAll()
         {
-            return Ok();
+            var _getAll = _userSystemService.GetAll();
+            var _userSystemDto = _mapper.Map<IEnumerable<UserSystemDto>>(_getAll);
+            
+            var responseApi = new ApiResponse<IEnumerable<UserSystemDto>>(_userSystemDto)
+            {
+                msg = "Resultados"
+            };
+            return Ok(responseApi);
         }
 
         [HttpPost]
@@ -57,5 +67,40 @@ namespace API.Controllers
             return Ok(response);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUserSystem(int id)
+        {
+            var _getUserSystem = await _userSystemService.GetUserSystem(id);
+            var _userSystemDto = _mapper.Map<UserSystemDto>(_getUserSystem);
+            return Ok(_userSystemDto);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, UserSystemDto userSystemDto)
+        {
+            var _userSystemDto = _mapper.Map<UserSystem>(userSystemDto);
+            userSystemDto.Id = id;
+            var result = await _userSystemService.UpdateUserSystem(_userSystemDto);
+            ApiResponse<UserSystemDto> response = new ApiResponse<UserSystemDto>(userSystemDto);
+            if (result)
+            {
+
+                var responseApi = new ApiResponse<UserSystemDto>(userSystemDto)
+                {
+                    msg = "Se actualizo correctamente"
+                };
+                response = responseApi;
+            }
+
+            return Ok(response);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _userSystemService.DeleteUserSystem(id);
+
+            return Ok(result);
+        }
     }
 }
