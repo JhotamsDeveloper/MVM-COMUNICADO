@@ -57,9 +57,22 @@ namespace API.Controllers
         public async Task<IActionResult> GetCompanyStatementByDocumento(string document)
         {
             var _getAllUser = _userSystemService.GetAll().Where(x => x.Document == document).FirstOrDefault();
-            var _getAllByDocument = _companyStatementService.GetAll().Where(x => x.Remitent == _getAllUser.Id || x.Destinatary == _getAllUser.Id);
-            var _companyStatementDto = _mapper.Map<IEnumerable<CompanyStatementDto>>(_getAllByDocument);
-            var responseApi = new ApiResponse<IEnumerable<CompanyStatementDto>>(_companyStatementDto)
+            var _getAllByDocument = _companyStatementService.GetAll().Where(x => x.Remitent == _getAllUser.Id || x.Destinatary == _getAllUser.Id).FirstOrDefault();
+            var _companyStatementDto = _mapper.Map<CompanyStatementDto>(_getAllByDocument);
+            var responseApi = new ApiResponse<CompanyStatementDto>(_companyStatementDto)
+            {
+                msg = "Resultados"
+            };
+            return Ok(responseApi);
+        }
+
+        [HttpGet()]
+        [Route("api/GetUserSystemByDocumento/{document}")]
+        public async Task<IActionResult> GetUserSystemByDocumento(string document)
+        {
+            var _getAllUser = _userSystemService.GetAll().Where(x => x.Document == document).FirstOrDefault();
+            var _userSystemDto = _mapper.Map<UserSystemDto>(_getAllUser);
+            var responseApi = new ApiResponse<UserSystemDto>(_userSystemDto)
             {
                 msg = "Resultados"
             };
