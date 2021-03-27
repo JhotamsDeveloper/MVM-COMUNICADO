@@ -1,0 +1,60 @@
+﻿@model WebClient.Models.UserSystemModel
+@{
+    ViewData["Title"] = "User";
+}
+
+<div class="container">
+    <div class="row justify-content-md-center m-5">
+
+            <div class="col-sm-12">
+        <form asp-action="User">
+                <div class="card mb-3">
+                    <div class="card-body">
+
+                        <div class="form-group">
+                            <label asp-for="NameUser" class="control-label"></label>
+                            <input asp-for="NameUser" class="form-control" />
+                            <span asp-validation-for="NameUser" class="text-danger"></span>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label asp-for="TypeDocument" class="control-label"></label>
+                                <input asp-for="TypeDocument" class="form-control" />
+                                <span asp-validation-for="TypeDocument" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label asp-for="Document" class="control-label"></label>
+                                <input asp-for="Document" class="form-control" />
+                                <span asp-validation-for="Document" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Email" class="control-label"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label asp-for="AddressUser" class="control-label"></label>
+                                <input asp-for="AddressUser" class="form-control" />
+                                <span asp-validation-for="AddressUser" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label asp-for="Phone" class="control-label"></label>
+                                <input asp-for="Phone" class="form-control" />
+                                <span asp-validation-for="Phone" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <button class="btn btn-info d-block" type="submit">Agregar</button>
+                </div>
+        </form>
+            </div>
+    </div>
+
+</div>
+

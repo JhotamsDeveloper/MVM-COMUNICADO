@@ -7,13 +7,12 @@ using System.Collections.Generic;
 
 namespace CORE.Entities
 {
-    public partial class Roles : BaseEntity
+    public partial class Roles  : BaseEntity
     {
         public Roles()
         {
             UserSystemRoles = new HashSet<UserSystemRoles>();
         }
-
         public string NameRoles { get; set; }
 
         public virtual ICollection<UserSystemRoles> UserSystemRoles { get; set; }

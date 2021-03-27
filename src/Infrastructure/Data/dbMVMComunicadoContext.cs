@@ -1,6 +1,10 @@
 ﻿using CORE.Entities;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
 using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
@@ -30,5 +34,20 @@ namespace Infrastructure.Data
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
 
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            ProccessAudiit();
+            return base.SaveChangesAsync(cancellationToken);
+        }
+
+        private void ProccessAudiit()
+        {
+            var _dateCreate = DateTimeOffset.UtcNow;
+            foreach (var item in ChangeTracker.Entries()
+                .Where(e => e.State == EntityState.Added && e.Entity is BaseEntity))
+            {
+
+            }
+        }
     }
 }

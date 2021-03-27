@@ -7,7 +7,8 @@ namespace WebClient.Models
 {
     public class UserSystemCompanyStatementModel
     {
-        public UserSystemModel UserSystem { get; set; }
+        public UserSystemModel UserSystemRemitent { get; set; }
+        public UserSystemModel UserSystemDestinate { get; set; }
         public CompanyStatementModel CompanyStatement { get; set; }
     }
 }

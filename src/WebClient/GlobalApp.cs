@@ -28,7 +28,7 @@ namespace WebClient
             UserSystemModel _userSystemModel = new UserSystemModel();
 
             _userSystemModel.Id = Convert.ToInt16(session.GetString("id"));
-            _userSystemModel.AddressUser = session.GetString("NameUser");
+            _userSystemModel.NameUser = session.GetString("NameUser");
             _userSystemModel.TypeDocument = Convert.ToInt16(session.GetString("TypeDocument"));
             _userSystemModel.Document = session.GetString("Document");
             _userSystemModel.Phone = session.GetString("Phone");

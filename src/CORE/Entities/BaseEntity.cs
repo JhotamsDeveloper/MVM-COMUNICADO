@@ -4,8 +4,9 @@ using System.Text;
 
 namespace CORE.Entities
 {
-    public class BaseEntity
+    public abstract class BaseEntity
     {
         public int Id { get; set; }
+
     }
 }

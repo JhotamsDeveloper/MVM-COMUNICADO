@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Home Page";
+
 }
 
 <div class="container">
@@ -10,17 +11,47 @@
         <div class="col-sm-6">
             <div class="card text-white bg-info mb-3">
                 <div class="card-body">
-                    <h5 class="card-title">Consultar Remitente</h5>
-                    <p class="card-text"></p>
-                    <form asp-action="ConsultUserRemitent">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <button class="btn text-white btn-outline-secondary" type="submit">Consulta por Cédula</button>
+                    @if (Model.UserSystemRemitent.Document != null)
+                    {
+                        <h5 class="card-title">Usuario consultado </h5>
+                        <p class="card-text">
+                            id : @Model.UserSystemRemitent.Id <br />
+                            NameUser : @Model.UserSystemRemitent.NameUser <br />
+                            TypeDocument : @Model.UserSystemRemitent.TypeDocument <br />
+                            Document : @Model.UserSystemRemitent.Document <br />
+                            Phone : @Model.UserSystemRemitent.Phone <br />
+                            Email : @Model.UserSystemRemitent.Email <br />
+                            AddressUser : @Model.UserSystemRemitent.AddressUser <br />
+
+                        </p>
+                        <hr />
+                        <h5 class="card-title text-center m-3">Cambiar de Remitente</h5>
+                        <form asp-action="User">
+                            <input asp-for="UserSystemRemitent" value="remitente" hidden />
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <button class="btn text-white btn-outline-secondary" type="submit">Consulta por Cédula</button>
+                                </div>
+                                <input asp-for="UserSystemRemitent.Document" name="document" class="form-control" />
+                                <span asp-validation-for="UserSystemRemitent.Document" class="text-danger"></span>
                             </div>
-                            <input asp-for="UserSystem.Document" name="document" class="form-control" />
-                            <span asp-validation-for="UserSystem.Document" class="text-danger"></span>
-                        </div>
-                    </form>
+                        </form>
+
+                    }
+                    else
+                    {
+                        <h5 class="card-title">Consultar Remitente</h5>
+                        <form asp-action="User">
+                            <input asp-for="UserSystemRemitent" value="remitente" hidden />
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <button class="btn text-white btn-outline-secondary" type="submit">Consulta por Cédula</button>
+                                </div>
+                                <input asp-for="UserSystemRemitent.Document" name="document" class="form-control" />
+                                <span asp-validation-for="UserSystemRemitent.Document" class="text-danger"></span>
+                            </div>
+                        </form>
+                    }
 
                 </div>
             </div>
@@ -35,8 +66,8 @@
                         <div class="input-group-prepend">
                             <button class="btn text-white btn-outline-secondary" type="button" id="button-addon1">Consulta por Cédula</button>
                         </div>
-                        <input asp-for="UserSystem.NameUser" class="form-control" placeholder="" aria-label="Example text with button addon" />
-                        <span asp-validation-for="UserSystem.NameUser" class="text-danger"></span>
+                        <input asp-for="UserSystemDestinate.NameUser" class="form-control" placeholder="" aria-label="Example text with button addon" />
+                        <span asp-validation-for="UserSystemDestinate.NameUser" class="text-danger"></span>
                     </div>
 
                 </div>
@@ -44,53 +75,53 @@
         </div>
     </div>
 
-    <form asp-action="Test">
+    @*<form asp-action="Test">
         <div class="row m-5">
             <div class="col-sm-6">
 
-                    <div class="card text-white bg-info mb-3">
-                        <div class="card-body">
+                <div class="card text-white bg-info mb-3">
+                    <div class="card-body">
 
-                            <div class="form-group">
-                                <label asp-for="UserSystem.NameUser" class="control-label"></label>
-                                <input asp-for="UserSystem.NameUser" class="form-control" />
-                                <span asp-validation-for="UserSystem.NameUser" class="text-danger"></span>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label asp-for="UserSystem.TypeDocument" class="control-label"></label>
-                                    <input asp-for="UserSystem.TypeDocument" class="form-control" />
-                                    <span asp-validation-for="UserSystem.TypeDocument" class="text-danger"></span>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label asp-for="UserSystem.Document" class="control-label"></label>
-                                    <input asp-for="UserSystem.Document" class="form-control" />
-                                    <span asp-validation-for="UserSystem.Document" class="text-danger"></span>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label asp-for="UserSystem.Email" class="control-label"></label>
-                                <input asp-for="UserSystem.Email" class="form-control" />
-                                <span asp-validation-for="UserSystem.Email" class="text-danger"></span>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label asp-for="UserSystem.AddressUser" class="control-label"></label>
-                                    <input asp-for="UserSystem.AddressUser" class="form-control" />
-                                    <span asp-validation-for="UserSystem.AddressUser" class="text-danger"></span>
-                                </div>
-
-                                <div class="form-group col-md-6">
-                                    <label asp-for="UserSystem.Phone" class="control-label"></label>
-                                    <input asp-for="UserSystem.Phone" class="form-control" />
-                                    <span asp-validation-for="UserSystem.Phone" class="text-danger"></span>
-                                </div>
-                            </div>
-
+                        <div class="form-group">
+                            <label asp-for="UserSystem.NameUser" class="control-label"></label>
+                            <input asp-for="UserSystem.NameUser" class="form-control" />
+                            <span asp-validation-for="UserSystem.NameUser" class="text-danger"></span>
                         </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label asp-for="UserSystem.TypeDocument" class="control-label"></label>
+                                <input asp-for="UserSystem.TypeDocument" class="form-control" />
+                                <span asp-validation-for="UserSystem.TypeDocument" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label asp-for="UserSystem.Document" class="control-label"></label>
+                                <input asp-for="UserSystem.Document" class="form-control" />
+                                <span asp-validation-for="UserSystem.Document" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="UserSystem.Email" class="control-label"></label>
+                            <input asp-for="UserSystem.Email" class="form-control" />
+                            <span asp-validation-for="UserSystem.Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label asp-for="UserSystem.AddressUser" class="control-label"></label>
+                                <input asp-for="UserSystem.AddressUser" class="form-control" />
+                                <span asp-validation-for="UserSystem.AddressUser" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label asp-for="UserSystem.Phone" class="control-label"></label>
+                                <input asp-for="UserSystem.Phone" class="form-control" />
+                                <span asp-validation-for="UserSystem.Phone" class="text-danger"></span>
+                            </div>
+                        </div>
+
                     </div>
+                </div>
 
             </div>
             <div class="col-sm-6">
@@ -138,7 +169,7 @@
                     </div>
                 </div>
             </div>
-    </div>
-    </form>
+        </div>
+    </form>*@
 
 </div>
