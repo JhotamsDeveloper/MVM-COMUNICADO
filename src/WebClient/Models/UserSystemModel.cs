@@ -14,6 +14,6 @@ namespace WebClient.Models
         public string Phone { get; set; }
         public string Email { get; set; }
         public string AddressUser { get; set; }
-        public string UserExistRemitent { get; set; }
+        public string TypeRoles { get; set; }
     }
 }

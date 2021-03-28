@@ -27,7 +27,7 @@
                         <hr />
                         <h5 class="card-title text-center m-3">Cambiar de Remitente</h5>
                         <form asp-action="User">
-                            <input asp-for="UserSystemRemitent" value="remitente" hidden />
+                            <input asp-for="UserSystemRemitent.TypeRoles" name="typeroles" value="Remitente" hidden />
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <button class="btn text-white btn-outline-secondary" type="submit">Consulta por Cédula</button>
@@ -42,7 +42,7 @@
                     {
                         <h5 class="card-title">Consultar Remitente</h5>
                         <form asp-action="User">
-                            <input asp-for="UserSystemRemitent" value="remitente" hidden />
+                            <input asp-for="UserSystemRemitent.TypeRoles" name="typeroles" value="Remitente" hidden />
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <button class="btn text-white btn-outline-secondary" type="submit">Consulta por Cédula</button>

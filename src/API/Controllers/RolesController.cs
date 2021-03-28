@@ -53,7 +53,7 @@ namespace API.Controllers
             return Ok(true);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             await _unitOfWork.RolesRepository.Delete(id);

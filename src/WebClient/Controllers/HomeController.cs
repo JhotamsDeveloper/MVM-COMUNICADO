@@ -57,6 +57,7 @@ namespace WebClient.Controllers
                 APIConsumption _aPIConsumption = new APIConsumption(_configuration);
                 var _user = await _aPIConsumption.ConsultUser(userSystemModel.Document);
 
+                //Usuario ya registrado
                 if (_user.data != null)
                 {
                     UserSystemModel _userSystemModel = new UserSystemModel();
@@ -69,6 +70,16 @@ namespace WebClient.Controllers
                     _userSystemModel.AddressUser = _user.data.AddressUser;
 
                     GlobalApp.SetUserSystemResponse(_httpContextAccessor.HttpContext.Session, _userSystemModel);
+
+                    //Consultar Role
+                    var _roles = await _aPIConsumption.ConsultRol();
+
+                    //Actualizar Role
+                    UserSystemRolesModel _userSystemRolesModel = new UserSystemRolesModel();
+                    _userSystemRolesModel.Roles = _valueRole;
+                    _userSystemRolesModel.UserSystem = _user.data.Id;
+                    await _aPIConsumption.PostUserRrolesSystemAsync(_userSystemRolesModel);
+
                     return RedirectToAction("Index");
                 }
                 else if(userSystemModel.Email == null)
@@ -95,12 +106,7 @@ namespace WebClient.Controllers
                         GlobalApp.SetUserSystemResponse(_httpContextAccessor.HttpContext.Session, _userSystemModel);
                     }
 
-                    //Agregar Roles
-                    if (userSystemModel.UserExistRemitent.Contains("remitente"))
-                    {
-                        _valueRole = 3;
-                    }
-
+                    //Actualizar Roles
                     UserSystemRolesModel _userSystemRolesModel = new UserSystemRolesModel();
                     _userSystemRolesModel.Roles = _valueRole;
                     _userSystemRolesModel.UserSystem = _user1.data.Id;

@@ -61,6 +61,16 @@ namespace WebClient.Services
             return true;
         }
 
+        internal async Task<IEnumerable<RolesModel>> ConsultRol()
+        {
+            string _rol = $"{_configuration.GetValue<string>("GetAllApis:Roles")}";
+            var _httpClient = new HttpClient();
+            var _json = await _httpClient.GetStringAsync(_rol);
+
+            IEnumerable<RolesModel> _rolResponse = JsonConvert.DeserializeObject<IEnumerable<RolesModel>>(_json);
+            return _rolResponse;
+        }
+
         private async Task<string> PostURI(Uri u, HttpContent c)
         {
             var response = string.Empty;
