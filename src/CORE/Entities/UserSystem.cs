@@ -16,7 +16,6 @@ namespace CORE.Entities
             CompanyStatementRemitentNavigation = new HashSet<CompanyStatement>();
             UserSystemRoles = new HashSet<UserSystemRoles>();
         }
-
         public string NameUser { get; set; }
         public int TypeDocument { get; set; }
         public string Document { get; set; }

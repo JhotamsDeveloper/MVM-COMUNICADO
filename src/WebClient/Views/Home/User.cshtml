@@ -5,9 +5,10 @@
 
 <div class="container">
     <div class="row justify-content-md-center m-5">
+        <div class="col-sm-12">
+            <form asp-action="User">
 
-            <div class="col-sm-12">
-        <form asp-action="User">
+                <input asp-for="TypeUser" name="TypeUser" value="@ViewBag.GetTypeUser" hidden />
                 <div class="card mb-3">
                     <div class="card-body">
 
@@ -24,7 +25,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label asp-for="Document" class="control-label"></label>
-                                <input asp-for="Document" class="form-control" />
+                                <input asp-for="Document" value="@ViewBag.GetDocument" class="form-control" />
                                 <span asp-validation-for="Document" class="text-danger"></span>
                             </div>
                         </div>
@@ -52,8 +53,8 @@
                     </div>
                     <button class="btn btn-info d-block" type="submit">Agregar</button>
                 </div>
-        </form>
-            </div>
+            </form>
+        </div>
     </div>
 
 </div>

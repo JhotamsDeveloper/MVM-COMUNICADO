@@ -12,4 +12,11 @@ namespace WebClient.ModelResponse
         public UserSystemModel data { get; set; }
         public object meta { get; set; }
     }
+
+    public class CompanyStatementConvertJsonResponse
+    {
+        public string msg { get; set; }
+        public ICollection<CompanyStatementConvertJson> data { get; set; }
+        public object meta { get; set; }
+    }
 }

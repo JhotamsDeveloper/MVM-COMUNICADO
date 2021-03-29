@@ -1,0 +1,143 @@
+﻿@model WebClient.Models.UserSystemCompanyStatementModel
+
+@{
+    ViewData["Title"] = "Home Page";
+
+}
+
+<div class="container">
+    <div class="row m-5">
+        <div class="col-sm-6">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-body">
+                    @if (Model.UserSystemRemitent.Document != null)
+                    {
+                        <h5 class="card-title">Usuario consultado </h5>
+                        <p class="card-text">
+                            id : @Model.UserSystemRemitent.Id <br />
+                            NameUser : @Model.UserSystemRemitent.NameUser <br />
+                            TypeDocument : @Model.UserSystemRemitent.TypeDocument <br />
+                            Document : @Model.UserSystemRemitent.Document <br />
+                            Phone : @Model.UserSystemRemitent.Phone <br />
+                            Email : @Model.UserSystemRemitent.Email <br />
+                            AddressUser : @Model.UserSystemRemitent.AddressUser <br />
+
+                        </p>
+                        <hr />
+                        <h5 class="card-title text-center m-3">Cambiar de Remitente</h5>
+                        <form asp-action="User">
+                            <input asp-for="UserSystemRemitent.TypeUser" name="TypeUser" value="Remitente" hidden />
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <button class="btn text-white btn-outline-secondary" type="submit">Consulta por Cédula</button>
+                                </div>
+                                <input asp-for="UserSystemRemitent.Document" name="document" class="form-control" />
+                                <span asp-validation-for="UserSystemRemitent.Document" class="text-danger"></span>
+                            </div>
+                        </form>
+
+                    }
+                    else
+                    {
+                        <h5 class="card-title">Consultar Remitente</h5>
+                        <form asp-action="User">
+                            <input asp-for="UserSystemRemitent.TypeUser" name="TypeUser" value="Remitente" hidden />
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <button class="btn text-white btn-outline-secondary" type="submit">Consulta por Cédula</button>
+                                </div>
+                                <input asp-for="UserSystemRemitent.Document" name="document" class="form-control" />
+                                <span asp-validation-for="UserSystemRemitent.Document" class="text-danger"></span>
+                            </div>
+                        </form>
+                    }
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card text-white bg-warning mb-3">
+                <div class="card-body">
+                    @if (Model.UserSystemDestinate.Document != null)
+                    {
+                        <h5 class="card-title">Usuario consultado </h5>
+                        <p class="card-text">
+                            id : @Model.UserSystemDestinate.Id <br />
+                            NameUser : @Model.UserSystemDestinate.NameUser <br />
+                            TypeDocument : @Model.UserSystemDestinate.TypeDocument <br />
+                            Document : @Model.UserSystemDestinate.Document <br />
+                            Phone : @Model.UserSystemDestinate.Phone <br />
+                            Email : @Model.UserSystemDestinate.Email <br />
+                            AddressUser : @Model.UserSystemDestinate.AddressUser <br />
+
+                        </p>
+                        <hr />
+
+
+
+                        <h5 class="card-title text-center m-3">Cambiar de destinatario</h5>
+                        <form asp-action="User">
+                            <input asp-for="UserSystemDestinate.TypeUser" name="TypeUser" value="Destinatario" hidden />
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <button class="btn text-white btn-outline-secondary" type="submit">Consulta por Cédula</button>
+                                </div>
+                                <input asp-for="UserSystemDestinate.Document" name="document" class="form-control" />
+                                <span asp-validation-for="UserSystemDestinate.Document" class="text-danger"></span>
+                            </div>
+                        </form>
+
+                    }
+                    else
+                    {
+                        <h5 class="card-title">Consultar Destinatario</h5>
+                        <form asp-action="User">
+                            <input asp-for="UserSystemDestinate.TypeUser" name="TypeUser" value="Destinatario" hidden />
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <button class="btn text-white btn-outline-secondary" type="submit">Consulta por Cédula</button>
+                                </div>
+                                <input asp-for="UserSystemDestinate.Document" name="document" class="form-control" />
+                                <span asp-validation-for="UserSystemDestinate.Document" class="text-danger"></span>
+                            </div>
+                        </form>
+                    }
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container m-5">
+    <form asp-action="CompanyStatement">
+
+        <div class="row justify-content-center mb-3">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="CompanyStatement.IsItInternally" class="control-label"></label>
+                    <select class="custom-select" name="IsItInternally"
+                            va
+                            asp-items="@Model.CompanyStatement.IsItInternallyList">
+                        <option selected>Selecciones una opción</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="CompanyStatement.NameFile" class="control-label"></label>
+                    <input asp-for="CompanyStatement.NameFile" name="NameFile" class="form-control" />
+                    <span asp-validation-for="CompanyStatement.NameFile" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mb-3">
+            <div class="form-group text-center">
+                <button class="btn btn-secondary" type="submit">Guardar Comunicado</button>
+            </div>
+        </div>
+    </form>
+</div>
+

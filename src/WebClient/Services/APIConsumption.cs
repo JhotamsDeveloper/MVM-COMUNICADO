@@ -46,6 +46,31 @@ namespace WebClient.Services
             return true;
         }
 
+        internal async Task<bool> PostCompanyStatement(CompanyStatementModel _companyStatementModel)
+        {
+            Uri _url = new Uri($"{_configuration.GetValue<string>("GetAllApis:CompanyStatement")}");
+            using (var client = new HttpClient())
+            using (var request = new HttpRequestMessage(HttpMethod.Post, _url))
+            {
+                var json = JsonConvert.SerializeObject(_companyStatementModel);
+
+                HttpContent c = new StringContent(json, Encoding.UTF8, "application/json");
+                var t = Task.Run(() => PostURI(_url, c));
+                t.Wait();
+            }
+            return true;
+        }
+
+        internal async Task<CompanyStatementConvertJsonResponse> ConsultCompanyStatement()
+        {
+            string _rol = $"{_configuration.GetValue<string>("GetAllApis:CompanyStatement")}";
+            var _httpClient = new HttpClient();
+            var _json = await _httpClient.GetStringAsync(_rol);
+
+            CompanyStatementConvertJsonResponse _rolResponse = JsonConvert.DeserializeObject<CompanyStatementConvertJsonResponse>(_json);
+            return _rolResponse;
+        }
+
         internal async Task<bool> PostUserRrolesSystemAsync(UserSystemRolesModel _userSystemRolesModel)
         {
             Uri _urlAddRoles = new Uri($"{_configuration.GetValue<string>("GetAllApis:UserSystemRoles")}");

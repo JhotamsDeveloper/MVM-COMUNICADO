@@ -1,0 +1,65 @@
+﻿@model IEnumerable<CompanyStatementModel>
+
+@{
+    ViewData["Title"] = "CompanyStatement";
+}
+
+<h1>CompanyStatement</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NameFile)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Remitent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Destinatary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsItInternally)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FilingNumber)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameFile)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Remitent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Destinatary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsItInternally)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FilingNumber)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
