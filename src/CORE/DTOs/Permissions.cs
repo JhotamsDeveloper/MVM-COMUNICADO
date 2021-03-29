@@ -6,6 +6,7 @@ namespace CORE.DTOs
 {
     public class Permissions
     {
-        public int NameRoles { get; set; }
+        public int IdRoles { get; set; }
+        public string NameRol { get; set; }
     }
 }

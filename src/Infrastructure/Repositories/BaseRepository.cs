@@ -41,7 +41,6 @@ namespace Infrastructure.Repositories
             _entities.Update(entity);
         }
 
-
         public async Task Delete(int id)
         {
             T entity = await GetById(id);

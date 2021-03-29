@@ -88,7 +88,7 @@ namespace WebClient.Services
 
         internal async Task<IEnumerable<RolesModel>> ConsultRol()
         {
-            string _rol = $"{_configuration.GetValue<string>("GetAllApis:Roles")}";
+            string _rol = $"{_configuration.GetValue<string>("GetAllApis:Security")}";
             var _httpClient = new HttpClient();
             var _json = await _httpClient.GetStringAsync(_rol);
 

@@ -2,11 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using WebClient.Models;
+using WebClient.Services;
 
 namespace WebClient.Controllers
 {
@@ -34,7 +31,6 @@ namespace WebClient.Controllers
         [HttpPost]
         public IActionResult Login(LoginModel loginModel)
         {
-
             return View();
         }
     }

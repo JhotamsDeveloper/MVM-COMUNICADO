@@ -6,6 +6,7 @@ using CORE.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace API.Controllers
@@ -41,27 +42,48 @@ namespace API.Controllers
         [HttpPost]
         public async Task<IActionResult> InsertUserSystem(UserSystemDto userSystem )
         {
+            var _roles = GlobalApp.RolesAuthirize;
             var _userSystem = _mapper.Map<UserSystem>(userSystem);
             var _userSystemDto = _mapper.Map<UserSystemDto>(_userSystem);
             ApiResponse<UserSystemDto> response = new ApiResponse<UserSystemDto>(_userSystemDto);
 
-            if (!_userSystemService.ValidadUserSystemByEmail(userSystem.Email))
+            if (_roles != null)
             {
-                await _userSystemService.InsertUserSystem(_userSystem);
-                var responseApi = new ApiResponse<UserSystemDto>(_userSystemDto)
-                {
-                    msg = "Usuario guardado exitosamente"
-                };
+                _roles.Where(x => x == 1 || x == 2);
 
-                response = responseApi;
+                if (_roles == null)
+                {
+                    var responseApi = new ApiResponse<UserSystemDto>(_userSystemDto)
+                    {
+                        msg = "Usuario no permitido"
+                    };
+
+                    return Ok(responseApi);
+                }
+
+                if (!_userSystemService.ValidadUserSystemByEmail(userSystem.Email))
+                {
+                    await _userSystemService.InsertUserSystem(_userSystem);
+                    var responseApi = new ApiResponse<UserSystemDto>(_userSystemDto)
+                    {
+                        msg = "Usuario guardado exitosamente"
+                    };
+
+                    response = responseApi;
+                }
+                else
+                {
+                    var responseApi = new ApiResponse<UserSystemDto>(_userSystemDto)
+                    {
+                        msg = "El Email ingresado ya existe"
+                    };
+                    response = responseApi;
+                }
+
             }
             else
             {
-                var responseApi = new ApiResponse<UserSystemDto>(_userSystemDto)
-                {
-                    msg = "El Email ingresado ya existe"
-                };
-                response = responseApi;
+                return Ok("Debe de registrarse");
             }
 
             return Ok(response);

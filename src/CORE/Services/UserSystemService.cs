@@ -74,19 +74,17 @@ namespace CORE.Services
                 .Where(x => x.Email.Contains(email) && x.Password.Contains(password)).FirstOrDefault();
             if (_data != null) {
 
+                _loginDto.Email = _data.Email;
                 var _getAllUR = _unitOfWork.UserSystemRolesRepository.GetAll();
-
                 var _roles = _getAllUR.Where(x => x.UserSystem == _data.Id);
 
-                if (_roles != null)
+                if (_roles.Count() > 0)
                 {
-                    _loginDto.Email = _data.Email;
-
                     List<Permissions> permissionsList = new List<Permissions>();
                     foreach (var item in _roles)
                     {
                         Permissions permissions = new Permissions();
-                        permissions.NameRoles = Convert.ToInt16(_roles.Select(x => x.Roles));
+                        permissions.IdRoles = (int)item.Roles;
                         permissionsList.Add(permissions);
                     }
                     _loginDto.PermissionsRoles = permissionsList;
