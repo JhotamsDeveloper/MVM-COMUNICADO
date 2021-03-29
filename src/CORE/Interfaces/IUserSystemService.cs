@@ -1,4 +1,5 @@
-﻿using CORE.Entities;
+﻿using CORE.DTOs;
+using CORE.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,6 +17,7 @@ namespace CORE.Interfaces
         Task<bool> UpdateUserSystem(UserSystem userSystem);
 
         Task<bool> DeleteUserSystem(int id);
+        Task<LoginDto> Login(string email, string password);
 
     }
 }

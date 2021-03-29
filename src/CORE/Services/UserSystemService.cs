@@ -1,6 +1,8 @@
-﻿using CORE.Entities;
+﻿using CORE.DTOs;
+using CORE.Entities;
 using CORE.Excepciones;
 using CORE.Interfaces;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,6 +64,37 @@ namespace CORE.Services
             _unitOfWork.UserSystemRepository.Update(_existeUster);
             await _unitOfWork.saveChangesAsync();
             return true;
+        }
+
+        public async Task<LoginDto> Login(string email, string password)
+        {
+            LoginDto _loginDto = new LoginDto();
+
+            var _data = _unitOfWork.UserSystemRepository.GetAll()
+                .Where(x => x.Email.Contains(email) && x.Password.Contains(password)).FirstOrDefault();
+            if (_data != null) {
+
+                var _getAllUR = _unitOfWork.UserSystemRolesRepository.GetAll();
+
+                var _roles = _getAllUR.Where(x => x.UserSystem == _data.Id);
+
+                if (_roles != null)
+                {
+                    _loginDto.Email = _data.Email;
+
+                    List<Permissions> permissionsList = new List<Permissions>();
+                    foreach (var item in _roles)
+                    {
+                        Permissions permissions = new Permissions();
+                        permissions.NameRoles = Convert.ToInt16(_roles.Select(x => x.Roles));
+                        permissionsList.Add(permissions);
+                    }
+                    _loginDto.PermissionsRoles = permissionsList;
+                }
+
+            }
+
+            return _loginDto;
         }
     }
 }

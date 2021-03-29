@@ -15,5 +15,6 @@ namespace WebClient.Models
         public string Email { get; set; }
         public string AddressUser { get; set; }
         public string TypeUser { get; set; }
+        public string Password { get; set; }
     }
 }

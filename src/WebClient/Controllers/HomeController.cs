@@ -71,19 +71,13 @@ namespace WebClient.Controllers
                     _userSystemModel.Phone = _user.data.Phone;
                     _userSystemModel.Email = _user.data.Email;
                     _userSystemModel.AddressUser = _user.data.AddressUser;
+                    _userSystemModel.Password = _user.data.Document;
 
                     if (userSystemModel.TypeUser == "Remitente")
                     {
                         GlobalApp.SetUserSystemResponseR(_httpContextAccessor.HttpContext.Session, _userSystemModel);
                     }else if(userSystemModel.TypeUser == "Destinatario")
                     {
-                        //Se puede implementar el rol de destinatario
-                        UserSystemRolesModel _userSystemRolesModel = new UserSystemRolesModel();
-                        _userSystemRolesModel.Roles = 1;
-                        _userSystemRolesModel.UserSystem = _userSystemModel.Id;
-
-                        await _aPIConsumption.PostUserRrolesSystemAsync(_userSystemRolesModel);
-
                         GlobalApp.SetUserSystemResponseD(_httpContextAccessor.HttpContext.Session, _userSystemModel);
                     }
                     return RedirectToAction("Radicar");
@@ -109,6 +103,7 @@ namespace WebClient.Controllers
                         _userSystemModel.Phone = _user1.data.Phone;
                         _userSystemModel.Email = _user1.data.Email;
                         _userSystemModel.AddressUser = _user1.data.AddressUser;
+                        _userSystemModel.Password = _user1.data.Document;
 
                         if (userSystemModel.TypeUser == "Remitente")
                         {
@@ -116,6 +111,13 @@ namespace WebClient.Controllers
                         }
                         else if (userSystemModel.TypeUser == "Destinatario")
                         {
+                            //Se puede implementar el rol de destinatario
+                            UserSystemRolesModel _userSystemRolesModel = new UserSystemRolesModel();
+                            _userSystemRolesModel.Roles = 1;
+                            _userSystemRolesModel.UserSystem = _userSystemModel.Id;
+
+                            await _aPIConsumption.PostUserRrolesSystemAsync(_userSystemRolesModel);
+
                             GlobalApp.SetUserSystemResponseD(_httpContextAccessor.HttpContext.Session, _userSystemModel);
                         }
                     }
@@ -126,7 +128,6 @@ namespace WebClient.Controllers
 
             return RedirectToAction("Radicar");
         }
-
 
         [HttpPost]
         public async Task<IActionResult> CompanyStatement(CompanyStatementModel companyStatementModel)
@@ -174,6 +175,7 @@ namespace WebClient.Controllers
         {
             return View();
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

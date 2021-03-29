@@ -22,6 +22,7 @@ namespace CORE.Entities
         public string Phone { get; set; }
         public string Email { get; set; }
         public string AddressUser { get; set; }
+        public string Password { get; set; }
 
         public virtual ICollection<AuditSystem> AuditSystem { get; set; }
         public virtual ICollection<CompanyStatement> CompanyStatementDestinataryNavigation { get; set; }
